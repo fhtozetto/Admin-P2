@@ -1,11 +1,16 @@
 package br.com.lph.adminp2.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Produto implements Serializable{
@@ -15,15 +20,24 @@ public class Produto implements Serializable{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	private String descricao;
+	private Integer validadeDias;
+	
+	@ManyToMany
+	@JoinTable(name="PRODUTO_CATEGORIA", 
+			joinColumns=@JoinColumn(name="produto_id"), 
+			inverseJoinColumns=@JoinColumn(name="categoria_id")
+	)
+	private List<Categoria> categorias = new ArrayList<>();
 	
 	public Produto() {
 		super();
 	}
 
-	public Produto(Integer id, String descricao) {
+	public Produto(Integer id, String descricao, Integer validadeDias) {
 		super();
 		this.id = id;
 		this.descricao = descricao;
+		this.validadeDias = validadeDias;
 	}
 
 	public Integer getId() {
@@ -41,7 +55,22 @@ public class Produto implements Serializable{
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
+	
+	public Integer getValidadeDias() {
+		return validadeDias;
+	}
 
+	public void setValidadeDias(Integer validadeDias) {
+		this.validadeDias = validadeDias;
+	}
+
+	public List<Categoria> getCategorias() {
+		return categorias;
+	}
+
+	public void setCategorias(List<Categoria> categorias) {
+		this.categorias = categorias;
+	}
 
 	@Override
 	public int hashCode() {

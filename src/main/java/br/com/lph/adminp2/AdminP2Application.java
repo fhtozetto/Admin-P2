@@ -31,16 +31,16 @@ public class AdminP2Application implements CommandLineRunner {
 		Categoria cat1 = new Categoria(null, "Informática");
 		Categoria cat2 = new Categoria(null, "Escritório");
 		
-		Produto p1 = new Produto(null, "Computador");
-		Produto p2 = new Produto(null, "Impressora");
-		Produto p3 = new Produto(null, "Mouse");
+		Produto p1 = new Produto(null, "Computador", 3);
+		Produto p2 = new Produto(null, "Impressora", 5);
+		Produto p3 = new Produto(null, "Mouse", 7);
 		
-		//cat1.getProdutos().addAll(Arrays.asList(p1, p2, p3));
-		//cat2.getProdutos().addAll(Arrays.asList(p2));
+		cat1.getProdutos().addAll(Arrays.asList(p1, p2, p3));
+		cat2.getProdutos().addAll(Arrays.asList(p2));
 		
-		//p1.getCategorias().addAll(Arrays.asList(cat1));
-		//p2.getCategorias().addAll(Arrays.asList(cat1, cat2));
-		//p3.getCategorias().addAll(Arrays.asList(cat1));
+		p1.getCategorias().addAll(Arrays.asList(cat1));
+		p2.getCategorias().addAll(Arrays.asList(cat1, cat2));
+		p3.getCategorias().addAll(Arrays.asList(cat1));
 		
 		categoriaRepository.saveAll(Arrays.asList(cat1, cat2));
 		produtoRepository.saveAll(Arrays.asList(p1, p2, p3));
