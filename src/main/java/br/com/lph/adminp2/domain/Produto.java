@@ -11,6 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 public class Produto implements Serializable{
@@ -22,12 +25,16 @@ public class Produto implements Serializable{
 	private String descricao;
 	private Integer validadeDias;
 	
+	@JsonBackReference // para o loop de ferencia cruzada
 	@ManyToMany
 	@JoinTable(name="PRODUTO_CATEGORIA", 
 			joinColumns=@JoinColumn(name="produto_id"), 
 			inverseJoinColumns=@JoinColumn(name="categoria_id")
 	)
 	private List<Categoria> categorias = new ArrayList<>();
+	
+	@OneToMany(mappedBy="produtos")
+	private List<CodigoBarras> codigosBarras = new ArrayList<>();
 	
 	public Produto() {
 		super();
@@ -70,6 +77,14 @@ public class Produto implements Serializable{
 
 	public void setCategorias(List<Categoria> categorias) {
 		this.categorias = categorias;
+	}
+
+	public List<CodigoBarras> getCodigosBarras() {
+		return codigosBarras;
+	}
+
+	public void setCodigosBarras(List<CodigoBarras> codigosBarras) {
+		this.codigosBarras = codigosBarras;
 	}
 
 	@Override

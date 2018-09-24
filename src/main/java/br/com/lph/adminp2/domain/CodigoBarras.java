@@ -1,70 +1,71 @@
 package br.com.lph.adminp2.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
-public class Categoria implements Serializable {
+public class CodigoBarras implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
-	private String descricao;
+	private String codBarras;
+	private Double quantidade;
 	
-	@JsonManagedReference // marcar no lado que tem que vir os objetos associados.
-	@ManyToMany(mappedBy="categorias")
-	private List<Produto> produtos = new ArrayList<>();	
+	@ManyToOne
+	@JoinColumn(name="codbarras_id") // nome da chave estrangeira
+	private Produto produtos;
 	
-	public Categoria() {
+	public CodigoBarras() {
 		super();
 	}
 
-
-	public Categoria(Integer id, String descricao) {
+	public CodigoBarras(Integer id, String codBarras, Double quantidade, Produto produto) {
 		super();
 		this.id = id;
-		this.descricao = descricao;
+		this.codBarras = codBarras;
+		this.quantidade = quantidade;
+		this.produtos = produto;
 	}
-
 
 	public Integer getId() {
 		return id;
 	}
 
-
 	public void setId(Integer id) {
 		this.id = id;
 	}
 
-
-	public String getDescricao() {
-		return descricao;
+	public String getCodBarras() {
+		return codBarras;
 	}
 
-
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
+	public void setCodBarras(String codBarras) {
+		this.codBarras = codBarras;
 	}
 
-	public List<Produto> getProdutos() {
+	public Double getQuantidade() {
+		return quantidade;
+	}
+
+	public void setQuantidade(Double quantidade) {
+		this.quantidade = quantidade;
+	}
+
+	public Produto getProduto() {
 		return produtos;
 	}
 
-
-	public void setProdutos(List<Produto> produtos) {
-		this.produtos = produtos;
+	public void setProduto(Produto produto) {
+		this.produtos = produto;
 	}
-
 
 	@Override
 	public int hashCode() {
@@ -74,7 +75,6 @@ public class Categoria implements Serializable {
 		return result;
 	}
 
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -83,7 +83,7 @@ public class Categoria implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Categoria other = (Categoria) obj;
+		CodigoBarras other = (CodigoBarras) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -91,5 +91,5 @@ public class Categoria implements Serializable {
 			return false;
 		return true;
 	}
-
+	
 }
