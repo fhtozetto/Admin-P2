@@ -10,7 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Categoria implements Serializable {
@@ -21,7 +22,8 @@ public class Categoria implements Serializable {
 	private Integer id;
 	private String descricao;
 	
-	@JsonManagedReference // marcar no lado que tem que vir os objetos associados.
+	//@JsonBackReference // marcar no lado que tem que vir os objetos associados.
+	@JsonIgnore
 	@ManyToMany(mappedBy="categorias")
 	private List<Produto> produtos = new ArrayList<>();	
 	

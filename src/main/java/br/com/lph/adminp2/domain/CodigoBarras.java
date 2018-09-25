@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -22,7 +23,8 @@ public class CodigoBarras implements Serializable{
 	private String codBarras;
 	private Double quantidade;
 	
-	@JsonBackReference
+	//@JsonBackReference
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="codbarras_id") // nome da chave estrangeira
 	private Produto produto;

@@ -13,7 +13,6 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -26,7 +25,7 @@ public class Produto implements Serializable{
 	private String descricao;
 	private Integer validadeDias;
 	
-	@JsonBackReference // para o loop de ferencia cruzada
+	//@JsonManagedReference // para o loop de ferencia cruzada
 	@ManyToMany
 	@JoinTable(name="PRODUTO_CATEGORIA", 
 			joinColumns=@JoinColumn(name="produto_id"), 
@@ -34,7 +33,7 @@ public class Produto implements Serializable{
 	)
 	private List<Categoria> categorias = new ArrayList<>();
 	
-	@JsonManagedReference
+	//@JsonManagedReference
 	@OneToMany(mappedBy="produto")
 	private List<CodigoBarras> codigosBarras = new ArrayList<>();
 	
