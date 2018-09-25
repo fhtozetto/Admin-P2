@@ -9,6 +9,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 public class CodigoBarras implements Serializable{
 	private static final long serialVersionUID = 1L;
@@ -19,9 +22,10 @@ public class CodigoBarras implements Serializable{
 	private String codBarras;
 	private Double quantidade;
 	
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name="codbarras_id") // nome da chave estrangeira
-	private Produto produtos;
+	private Produto produto;
 	
 	public CodigoBarras() {
 		super();
@@ -32,7 +36,7 @@ public class CodigoBarras implements Serializable{
 		this.id = id;
 		this.codBarras = codBarras;
 		this.quantidade = quantidade;
-		this.produtos = produto;
+		this.produto = produto;
 	}
 
 	public Integer getId() {
@@ -60,11 +64,11 @@ public class CodigoBarras implements Serializable{
 	}
 
 	public Produto getProduto() {
-		return produtos;
+		return produto;
 	}
 
 	public void setProduto(Produto produto) {
-		this.produtos = produto;
+		this.produto = produto;
 	}
 
 	@Override

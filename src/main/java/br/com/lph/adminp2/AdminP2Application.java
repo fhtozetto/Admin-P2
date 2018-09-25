@@ -30,9 +30,9 @@ public class AdminP2Application implements CommandLineRunner {
 		SpringApplication.run(AdminP2Application.class, args);
 	}
 		
-		@Override
-		public void run(String... args) throws Exception {
-		
+	@Override
+	public void run(String... args) throws Exception {
+	
 		Categoria cat1 = new Categoria(null, "Saladas");
 		Categoria cat2 = new Categoria(null, "Marmitex");
 		Categoria cat3 = new Categoria(null, "Acompanhametos");
@@ -63,7 +63,6 @@ public class AdminP2Application implements CommandLineRunner {
 		categoriaRepository.saveAll(Arrays.asList(cat1, cat2, cat3));
 		produtoRepository.saveAll(Arrays.asList(p1, p2, p3));
 		codigoBarrasRepository.saveAll(Arrays.asList(cb1, cb2, cb3, cb4, cb5, cb6));
-		
 		
 	}
 }
