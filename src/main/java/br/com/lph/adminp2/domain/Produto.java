@@ -33,6 +33,13 @@ public class Produto implements Serializable{
 	)
 	private List<Categoria> categorias = new ArrayList<>();
 	
+	@ManyToMany
+	@JoinTable(name="PRODUTO_PRODUCOES", 
+			joinColumns=@JoinColumn(name="produto_id"), 
+			inverseJoinColumns=@JoinColumn(name="producoes_id")
+	)
+	private List<Producao> producoes = new ArrayList<>();
+	
 	//@JsonManagedReference
 	@OneToMany(mappedBy="produto")
 	private List<CodigoBarras> codigosBarras = new ArrayList<>();

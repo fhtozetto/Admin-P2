@@ -1,6 +1,7 @@
 package br.com.lph.adminp2.domain;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,33 +10,42 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class CodigoBarras implements Serializable{
+public class ItensProducao implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
-	private String codBarras;
 	private Double quantidade;
+	private Double precoVenda;
 	
-	//@JsonBackReference
+	@JsonFormat(pattern="dd/MM/yyyy HH:mm")
+	private Date validade;
+	
 	@JsonIgnore
 	@ManyToOne
-	@JoinColumn(name="produto_id") // nome da chave estrangeira
-	private Produto produto;
+	@JoinColumn(name="producao_id")
+	private Producao producao;
 	
-	public CodigoBarras() {
+	@ManyToOne
+	@JoinColumn(name="produto_id")
+	private Produto produto;
+
+	public ItensProducao() {
 		super();
 	}
 
-	public CodigoBarras(Integer id, String codBarras, Double quantidade, Produto produto) {
+	public ItensProducao(Integer id, Double quantidade, Double precoVenda, Date validade, Producao producao, Produto produto) {
 		super();
 		this.id = id;
-		this.codBarras = codBarras;
 		this.quantidade = quantidade;
+		this.precoVenda = precoVenda;
+		this.validade = validade;
+		this.producao = producao;
 		this.produto = produto;
 	}
 
@@ -47,20 +57,36 @@ public class CodigoBarras implements Serializable{
 		this.id = id;
 	}
 
-	public String getCodBarras() {
-		return codBarras;
-	}
-
-	public void setCodBarras(String codBarras) {
-		this.codBarras = codBarras;
-	}
-
 	public Double getQuantidade() {
 		return quantidade;
 	}
 
 	public void setQuantidade(Double quantidade) {
 		this.quantidade = quantidade;
+	}
+
+	public Double getPrecoVenda() {
+		return precoVenda;
+	}
+
+	public void setPrecoVenda(Double precoVenda) {
+		this.precoVenda = precoVenda;
+	}
+
+	public Date getValidade() {
+		return validade;
+	}
+
+	public void setValidade(Date validade) {
+		this.validade = validade;
+	}
+
+	public Producao getProducao() {
+		return producao;
+	}
+
+	public void setProducao(Producao producao) {
+		this.producao = producao;
 	}
 
 	public Produto getProduto() {
@@ -87,7 +113,7 @@ public class CodigoBarras implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		CodigoBarras other = (CodigoBarras) obj;
+		ItensProducao other = (ItensProducao) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -95,5 +121,5 @@ public class CodigoBarras implements Serializable{
 			return false;
 		return true;
 	}
-	
+
 }

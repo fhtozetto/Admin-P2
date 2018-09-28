@@ -1,42 +1,41 @@
 package br.com.lph.adminp2.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class CodigoBarras implements Serializable{
+public class Unidade implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
-	private String codBarras;
-	private Double quantidade;
+	private String descricao;
+	private String fone;
 	
-	//@JsonBackReference
 	@JsonIgnore
-	@ManyToOne
-	@JoinColumn(name="produto_id") // nome da chave estrangeira
-	private Produto produto;
+	@OneToMany(mappedBy="unidade")
+	private List<Producao> producoes = new ArrayList<>();
 	
-	public CodigoBarras() {
+	
+	public Unidade() {
 		super();
 	}
 
-	public CodigoBarras(Integer id, String codBarras, Double quantidade, Produto produto) {
+	public Unidade(Integer id, String descricao, String fone) {
 		super();
 		this.id = id;
-		this.codBarras = codBarras;
-		this.quantidade = quantidade;
-		this.produto = produto;
+		this.descricao = descricao;
+		this.fone = fone;
 	}
 
 	public Integer getId() {
@@ -47,28 +46,20 @@ public class CodigoBarras implements Serializable{
 		this.id = id;
 	}
 
-	public String getCodBarras() {
-		return codBarras;
+	public String getDescricao() {
+		return descricao;
 	}
 
-	public void setCodBarras(String codBarras) {
-		this.codBarras = codBarras;
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 
-	public Double getQuantidade() {
-		return quantidade;
+	public String getFone() {
+		return fone;
 	}
 
-	public void setQuantidade(Double quantidade) {
-		this.quantidade = quantidade;
-	}
-
-	public Produto getProduto() {
-		return produto;
-	}
-
-	public void setProduto(Produto produto) {
-		this.produto = produto;
+	public void setFone(String fone) {
+		this.fone = fone;
 	}
 
 	@Override
@@ -87,7 +78,7 @@ public class CodigoBarras implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		CodigoBarras other = (CodigoBarras) obj;
+		Unidade other = (Unidade) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -95,5 +86,5 @@ public class CodigoBarras implements Serializable{
 			return false;
 		return true;
 	}
-	
+
 }
