@@ -10,12 +10,16 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import br.com.lph.adminp2.domain.Categoria;
 import br.com.lph.adminp2.domain.CodigoBarras;
+import br.com.lph.adminp2.domain.Descarte;
+import br.com.lph.adminp2.domain.ItensDescarte;
 import br.com.lph.adminp2.domain.ItensProducao;
 import br.com.lph.adminp2.domain.Producao;
 import br.com.lph.adminp2.domain.Produto;
 import br.com.lph.adminp2.domain.Unidade;
 import br.com.lph.adminp2.repositories.CategoriaRepository;
 import br.com.lph.adminp2.repositories.CodigoBarrasRepository;
+import br.com.lph.adminp2.repositories.DescarteRepository;
+import br.com.lph.adminp2.repositories.ItensDescarteRepository;
 import br.com.lph.adminp2.repositories.ItensProducaoRepository;
 import br.com.lph.adminp2.repositories.ProducaoRepository;
 import br.com.lph.adminp2.repositories.ProdutoRepository;
@@ -41,6 +45,12 @@ public class AdminP2Application implements CommandLineRunner {
 	
 	@Autowired
 	private ItensProducaoRepository itensProducaoRepository;
+	
+	@Autowired
+	private DescarteRepository descarteRepository;
+	
+	@Autowired
+	private ItensDescarteRepository itensDescarteRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(AdminP2Application.class, args);
@@ -103,6 +113,16 @@ public class AdminP2Application implements CommandLineRunner {
 		producaoRepository.saveAll(Arrays.asList(producao1, producao2));
 		itensProducaoRepository.saveAll(Arrays.asList(ip1, ip2, ip3, ip4, ip5, ip6, ip7));
 		
+		Descarte descarte1 = new Descarte(null, sdf.parse("10/10/2017 13:15"), un1);
+		Descarte descarte2 = new Descarte(null, sdf.parse("10/10/2017 13:15"), un2);
 		
+		ItensDescarte id1 = new ItensDescarte(null, 2.00, 2.35, descarte1, p1);
+		ItensDescarte id2 = new ItensDescarte(null, 2.00, 2.35, descarte2, p1);
+		
+		descarte1.getItensDescartes().addAll(Arrays.asList(id1));
+		descarte2.getItensDescartes().addAll(Arrays.asList(id2));
+		
+		descarteRepository.saveAll(Arrays.asList(descarte1, descarte2));
+		itensDescarteRepository.saveAll(Arrays.asList(id1, id2));
 	}
 }

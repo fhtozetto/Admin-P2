@@ -26,6 +26,10 @@ public class Unidade implements Serializable {
 	@OneToMany(mappedBy="unidade")
 	private List<Producao> producoes = new ArrayList<>();
 	
+	@JsonIgnore
+	@OneToMany(mappedBy="unidade")
+	private List<Descarte> descartes =  new ArrayList<>();
+	
 	
 	public Unidade() {
 		super();
