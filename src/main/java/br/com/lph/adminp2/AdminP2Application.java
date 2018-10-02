@@ -15,6 +15,7 @@ import br.com.lph.adminp2.domain.ItensDescarte;
 import br.com.lph.adminp2.domain.ItensProducao;
 import br.com.lph.adminp2.domain.Producao;
 import br.com.lph.adminp2.domain.Produto;
+import br.com.lph.adminp2.domain.ProdutoDetalhes;
 import br.com.lph.adminp2.domain.Unidade;
 import br.com.lph.adminp2.repositories.CategoriaRepository;
 import br.com.lph.adminp2.repositories.CodigoBarrasRepository;
@@ -22,6 +23,7 @@ import br.com.lph.adminp2.repositories.DescarteRepository;
 import br.com.lph.adminp2.repositories.ItensDescarteRepository;
 import br.com.lph.adminp2.repositories.ItensProducaoRepository;
 import br.com.lph.adminp2.repositories.ProducaoRepository;
+import br.com.lph.adminp2.repositories.ProdutoDetalhesRepository;
 import br.com.lph.adminp2.repositories.ProdutoRepository;
 import br.com.lph.adminp2.repositories.UnidadeRepository;
 
@@ -51,6 +53,9 @@ public class AdminP2Application implements CommandLineRunner {
 	
 	@Autowired
 	private ItensDescarteRepository itensDescarteRepository;
+	
+	@Autowired
+	private ProdutoDetalhesRepository produtoDetalhesRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(AdminP2Application.class, args);
@@ -124,5 +129,21 @@ public class AdminP2Application implements CommandLineRunner {
 		
 		descarteRepository.saveAll(Arrays.asList(descarte1, descarte2));
 		itensDescarteRepository.saveAll(Arrays.asList(id1, id2));
+		
+		ProdutoDetalhes pd1 = new ProdutoDetalhes(p1, un1, 5.00, 3.00, 10.00);
+		ProdutoDetalhes pd2 = new ProdutoDetalhes(p1, un2, 5.50, 3.00, 6.00);
+		ProdutoDetalhes pd3 = new ProdutoDetalhes(p2, un1, 10.00, 7.50, 30.00);
+		ProdutoDetalhes pd4 = new ProdutoDetalhes(p2, un2, 10.50, 6.50, 50.00);
+		ProdutoDetalhes pd5 = new ProdutoDetalhes(p3, un1, 2.00, 1.00, 120.00);
+		ProdutoDetalhes pd6 = new ProdutoDetalhes(p3, un2, 2.50, 1.00, 150.00);
+		
+		p1.getDetalhesPorUnidades().addAll(Arrays.asList(pd1, pd2));
+		p2.getDetalhesPorUnidades().addAll(Arrays.asList(pd3, pd4));
+		p3.getDetalhesPorUnidades().addAll(Arrays.asList(pd5, pd6));
+		
+		un1.getProdutosPorUnidade().addAll(Arrays.asList(pd1, pd3, pd5));
+		un2.getProdutosPorUnidade().addAll(Arrays.asList(pd2, pd4, pd6));
+		
+		produtoDetalhesRepository.saveAll(Arrays.asList(pd1, pd2, pd3, pd4, pd5, pd6));
 	}
 }

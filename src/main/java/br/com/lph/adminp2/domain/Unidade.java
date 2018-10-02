@@ -2,7 +2,9 @@ package br.com.lph.adminp2.domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -29,6 +31,9 @@ public class Unidade implements Serializable {
 	@JsonIgnore
 	@OneToMany(mappedBy="unidade")
 	private List<Descarte> descartes =  new ArrayList<>();
+	
+	@OneToMany(mappedBy="id.unidade")
+	private Set<ProdutoDetalhes> produtosPorUnidade = new HashSet<>(); 
 	
 	
 	public Unidade() {
@@ -66,6 +71,14 @@ public class Unidade implements Serializable {
 		this.fone = fone;
 	}
 
+	public Set<ProdutoDetalhes> getProdutosPorUnidade() {
+		return produtosPorUnidade;
+	}
+
+	public void setProdutosPorUnidade(Set<ProdutoDetalhes> produtosPorUnidade) {
+		this.produtosPorUnidade = produtosPorUnidade;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

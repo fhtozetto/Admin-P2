@@ -2,7 +2,9 @@ package br.com.lph.adminp2.domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,8 +15,6 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 @Entity
 public class Produto implements Serializable{
 	private static final long serialVersionUID = 1L;
@@ -24,8 +24,8 @@ public class Produto implements Serializable{
 	private Integer id;
 	private String descricao;
 	private Integer validadeDias;
-	
-	//@JsonManagedReference // para o loop de ferencia cruzada
+
+
 	@ManyToMany
 	@JoinTable(name="PRODUTO_CATEGORIA", 
 			joinColumns=@JoinColumn(name="produto_id"), 
@@ -33,16 +33,12 @@ public class Produto implements Serializable{
 	)
 	private List<Categoria> categorias = new ArrayList<>();
 	
-	@ManyToMany
-	@JoinTable(name="PRODUTO_PRODUCOES", 
-			joinColumns=@JoinColumn(name="produto_id"), 
-			inverseJoinColumns=@JoinColumn(name="producoes_id")
-	)
-	private List<Producao> producoes = new ArrayList<>();
-	
-	//@JsonManagedReference
 	@OneToMany(mappedBy="produto")
 	private List<CodigoBarras> codigosBarras = new ArrayList<>();
+	
+	@OneToMany(mappedBy="id.produto")
+	private Set<ProdutoDetalhes> detalhesPorUnidades = new HashSet<>(); 
+	
 	
 	public Produto() {
 		super();
@@ -53,6 +49,14 @@ public class Produto implements Serializable{
 		this.id = id;
 		this.descricao = descricao;
 		this.validadeDias = validadeDias;
+	}
+	
+	public List<Unidade> getUnidade() {
+		List<Unidade> lista = new ArrayList<>();
+		for (ProdutoDetalhes x : detalhesPorUnidades) {
+			lista.add(x.getUnidade());
+		}
+		return lista;
 	}
 
 	public Integer getId() {
@@ -95,6 +99,15 @@ public class Produto implements Serializable{
 		this.codigosBarras = codigosBarras;
 	}
 
+	public Set<ProdutoDetalhes> getDetalhesPorUnidades() {
+		return detalhesPorUnidades;
+	}
+
+	public void setDetalhesPorUnidades(Set<ProdutoDetalhes> detalhesPorUnidades) {
+		this.detalhesPorUnidades = detalhesPorUnidades;
+	}
+
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

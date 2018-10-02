@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.lph.adminp2.domain.Categoria;
 import br.com.lph.adminp2.repositories.CategoriaRepository;
-import br.com.lph.adminp2.services.exceptions.ObjectNotFoundException;
+import br.com.lph.adminp2.services.exceptions.ObjectNotFoundException;;
 
 @Service
 public class CategoriaService {
