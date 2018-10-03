@@ -15,6 +15,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Produto implements Serializable{
 	private static final long serialVersionUID = 1L;
@@ -49,14 +51,6 @@ public class Produto implements Serializable{
 		this.id = id;
 		this.descricao = descricao;
 		this.validadeDias = validadeDias;
-	}
-	
-	public List<Unidade> getUnidade() {
-		List<Unidade> lista = new ArrayList<>();
-		for (ProdutoDetalhes x : detalhesPorUnidades) {
-			lista.add(x.getUnidade());
-		}
-		return lista;
 	}
 
 	public Integer getId() {

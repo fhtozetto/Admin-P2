@@ -32,6 +32,7 @@ public class Unidade implements Serializable {
 	@OneToMany(mappedBy="unidade")
 	private List<Descarte> descartes =  new ArrayList<>();
 	
+	@JsonIgnore
 	@OneToMany(mappedBy="id.unidade")
 	private Set<ProdutoDetalhes> produtosPorUnidade = new HashSet<>(); 
 	

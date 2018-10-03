@@ -9,7 +9,7 @@ import javax.persistence.ManyToOne;
 @Embeddable
 public class ProdutoDetalhesPK implements Serializable {
 	private static final long serialVersionUID = 1L;
-
+	
 	@ManyToOne
 	@JoinColumn(name="produto_id")
 	private Produto produto;
