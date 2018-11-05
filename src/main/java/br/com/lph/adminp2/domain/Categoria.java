@@ -19,7 +19,7 @@ public class Categoria implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
-	private String descricao;
+	private String nome;
 	
 	//@JsonBackReference // marcar no lado que tem que vir os objetos associados.
 	@JsonIgnore
@@ -31,10 +31,10 @@ public class Categoria implements Serializable {
 	}
 
 
-	public Categoria(Integer id, String descricao) {
+	public Categoria(Integer id, String nome) {
 		super();
 		this.id = id;
-		this.descricao = descricao;
+		this.nome = nome;
 	}
 
 
@@ -48,13 +48,13 @@ public class Categoria implements Serializable {
 	}
 
 
-	public String getDescricao() {
-		return descricao;
+	public String getNome() {
+		return nome;
 	}
 
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	public List<Produto> getProdutos() {
