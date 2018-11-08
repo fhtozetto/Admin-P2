@@ -1,4 +1,4 @@
-package br.com.lph.adminp2.exception;
+package br.com.lph.adminp2.recources.exception;
 
 import java.io.Serializable;
 
