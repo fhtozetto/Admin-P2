@@ -8,8 +8,6 @@ import org.hibernate.validator.constraints.Length;
 
 import br.com.lph.adminp2.domain.Produto;
 
-
-
 public class ProdutoDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -23,7 +21,6 @@ public class ProdutoDTO implements Serializable {
 	
 	public ProdutoDTO() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	
 	public ProdutoDTO(Produto obj) {
