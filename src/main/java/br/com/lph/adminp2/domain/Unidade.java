@@ -21,7 +21,7 @@ public class Unidade implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
-	private String descricao;
+	private String nome;
 	private String fone;
 	
 	@JsonIgnore
@@ -41,10 +41,10 @@ public class Unidade implements Serializable {
 		super();
 	}
 
-	public Unidade(Integer id, String descricao, String fone) {
+	public Unidade(Integer id, String nome, String fone) {
 		super();
 		this.id = id;
-		this.descricao = descricao;
+		this.nome = nome;
 		this.fone = fone;
 	}
 
@@ -56,12 +56,12 @@ public class Unidade implements Serializable {
 		this.id = id;
 	}
 
-	public String getDescricao() {
-		return descricao;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	public String getFone() {
