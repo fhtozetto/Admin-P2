@@ -38,8 +38,16 @@ public class ProdutoDetalhes implements Serializable {
 		return id.getProduto();
 	}
 	
+	public void setProduto(Produto produto) {
+		id.setProduto(produto);
+	}
+	
 	public Unidade getUnidade() {
 		return id.getUnidade();
+	}
+	
+	public void setUnidade(Unidade unidade) {
+		id.setUnidade(unidade);
 	}
 
 	public ProdutoDetalhesPK getId() {

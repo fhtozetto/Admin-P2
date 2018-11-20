@@ -1,5 +1,6 @@
 package br.com.lph.adminp2.recources;
 
+import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -14,9 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.com.lph.adminp2.domain.Produto;
 import br.com.lph.adminp2.dto.ProdutoDTO;
+import br.com.lph.adminp2.dto.ProdutoNewDTO;
 import br.com.lph.adminp2.service.ProdutoService;
 
 @RestController // Marca a classe como controladora rest
@@ -65,6 +68,14 @@ public class ProdutoResource {
 		Page<ProdutoDTO> listDto = list.map(obj -> new ProdutoDTO(obj));
 		
 		return ResponseEntity.ok().body(listDto);
+	}
+	
+	@RequestMapping(method=RequestMethod.POST)
+	public ResponseEntity<Void> insert(@Valid @RequestBody ProdutoNewDTO objDTO) {
+		Produto obj = service.fromDTO(objDTO);
+		obj = service.insert(obj);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
+		return ResponseEntity.created(uri).build();
 	}
 
 }
