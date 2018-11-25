@@ -70,6 +70,14 @@ public class ProdutoResource {
 		return ResponseEntity.ok().body(listDto);
 	}
 	
+	@RequestMapping(value="/codigo", method=RequestMethod.GET)
+	public ResponseEntity<Produto> findByCodBarras(
+			@RequestParam(value="barras", defaultValue="") String codigoDeBarras) {
+		Produto obj = service.search(codigoDeBarras);
+		
+		return ResponseEntity.ok().body(obj);
+	}
+	
 	@RequestMapping(method=RequestMethod.POST)
 	public ResponseEntity<Void> insert(@Valid @RequestBody ProdutoNewDTO objDTO) {
 		Produto obj = service.fromDTO(objDTO);

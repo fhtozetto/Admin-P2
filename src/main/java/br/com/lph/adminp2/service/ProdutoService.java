@@ -118,6 +118,10 @@ public class ProdutoService {
 		
 		return obj;
 	}
+	
+	public Produto search(String codigoDeBarras) {
+		return repo.search(codigoDeBarras);
+	}
 
 
 }
