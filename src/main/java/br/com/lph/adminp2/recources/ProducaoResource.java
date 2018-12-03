@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.com.lph.adminp2.domain.Producao;
+import br.com.lph.adminp2.dto.ProducaoNewDTO;
 import br.com.lph.adminp2.service.ProducaoService;
 
 @RestController // Marca a classe como controladora rest
@@ -29,8 +30,9 @@ public class ProducaoResource {
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
-	public ResponseEntity<Void> insert(@RequestBody Producao obj) {
-		obj = service.insert(obj);
+	public ResponseEntity<Void> insert(@RequestBody ProducaoNewDTO objDTO) { // precisar ser corrigido
+		Producao obj = new Producao();
+		obj = service.insert(objDTO);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
 	}
@@ -42,6 +44,7 @@ public class ProducaoResource {
 		return ResponseEntity.noContent().build();
 		
 	}
+
 
 }
 	

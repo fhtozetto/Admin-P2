@@ -21,7 +21,8 @@ public class ItensProducao implements Serializable{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	private Double quantidade;
-	private Double precoVenda;
+	private Double valorProduto;
+	//private Double precoUnitarioVenda;
 	
 	@JsonFormat(pattern="dd/MM/yyyy HH:mm")
 	private Date validade;
@@ -39,11 +40,12 @@ public class ItensProducao implements Serializable{
 		super();
 	}
 
-	public ItensProducao(Integer id, Double quantidade, Double precoVenda, Date validade, Producao producao, Produto produto) {
+	public ItensProducao(Integer id, Double quantidade, Double valorProduto, Date validade, Producao producao, Produto produto) {
 		super();
 		this.id = id;
 		this.quantidade = quantidade;
-		this.precoVenda = precoVenda;
+		this.valorProduto = valorProduto;
+		//this.precoUnitarioVenda = precoUnitarioVenda;
 		this.validade = validade;
 		this.producao = producao;
 		this.produto = produto;
@@ -63,14 +65,6 @@ public class ItensProducao implements Serializable{
 
 	public void setQuantidade(Double quantidade) {
 		this.quantidade = quantidade;
-	}
-
-	public Double getPrecoVenda() {
-		return precoVenda;
-	}
-
-	public void setPrecoVenda(Double precoVenda) {
-		this.precoVenda = precoVenda;
 	}
 
 	public Date getValidade() {
@@ -97,6 +91,24 @@ public class ItensProducao implements Serializable{
 		this.produto = produto;
 	}
 
+	public Double getValorProduto() {
+		return valorProduto;
+	}
+
+	public void setValorProduto(Double valorProduto) {
+		this.valorProduto = valorProduto;
+	}
+	
+	/*
+	public Double getPrecoUnitarioVenda() {
+		return precoUnitarioVenda;
+	}
+
+	public void setPrecoUnitarioVenda(Double precoUnitarioVenda) {
+		this.precoUnitarioVenda = precoUnitarioVenda;
+	}
+	*/
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
