@@ -31,8 +31,7 @@ public class ProducaoResource {
 	
 	@RequestMapping(method=RequestMethod.POST)
 	public ResponseEntity<Void> insert(@RequestBody ProducaoNewDTO objDTO) { // precisar ser corrigido
-		Producao obj = new Producao();
-		obj = service.insert(objDTO);
+		Producao obj = service.insert(objDTO);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
 	}

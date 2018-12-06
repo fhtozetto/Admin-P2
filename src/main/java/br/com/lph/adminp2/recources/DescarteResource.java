@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.com.lph.adminp2.domain.Descarte;
+import br.com.lph.adminp2.dto.DescarteNewDTO;
 import br.com.lph.adminp2.service.DescarteService;
 
 @RestController // Marca a classe como controladora rest
@@ -29,8 +30,8 @@ public class DescarteResource {
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
-	public ResponseEntity<Void> insert(@RequestBody Descarte obj) {
-		obj = service.insert(obj);
+	public ResponseEntity<Void> insert(@RequestBody DescarteNewDTO objDTO) {
+		Descarte obj = service.insert(objDTO);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
 	}
