@@ -8,6 +8,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.com.lph.adminp2.domain.Usuario;
@@ -21,6 +22,9 @@ public class UsuarioService {
 	
 	@Autowired // cria o objeto automaticamente por injeção de dependência ou inversão de controle.
 	private UsuarioRepository repo;
+	
+	@Autowired
+	private BCryptPasswordEncoder pe;
 	
 	public Usuario find(Integer id) {
 		Optional<Usuario> obj = repo.findById(id);
@@ -59,7 +63,7 @@ public class UsuarioService {
 	}
 	
 	public Usuario fromDTO(UsuarioDTO objDTO) {
-		return new Usuario(objDTO.getId(), null, objDTO.getNomeUsuario(), objDTO.getSenha(), null );
+		return new Usuario(objDTO.getId(), null, objDTO.getNomeUsuario(), pe.encode(objDTO.getSenha()), null );
 	}
 	
 	private void updateData(Usuario newObj, Usuario obj) {

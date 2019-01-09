@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.com.lph.adminp2.domain.Categoria;
@@ -61,15 +62,18 @@ public class DBService {
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 	
+	@Autowired
+	private BCryptPasswordEncoder pe;
+	
 	
 	public void instantiateTestDataBase() throws ParseException {
 
 		Unidade un1 = new Unidade(null, "Loja 28 - Cajuru", "15 3225-2443");
 		Unidade un2 = new Unidade(null, "Loja 32 - Eden", "15 3325-6339");
 		
-		Usuario usu1 = new Usuario(null, "Fernando Henrique Tozetto", "fhtozetto", "123", un1);
-		Usuario usu2 = new Usuario(null, "Karina Mayumi Une", "kmune", "123", un2);
-		Usuario usu3 = new Usuario(null, "Lucas Eiji Une Tozetto", "leutozetto", "123", un1);
+		Usuario usu1 = new Usuario(null, "Fernando Henrique Tozetto", "fhtozetto", pe.encode("123"), un1);
+		Usuario usu2 = new Usuario(null, "Karina Mayumi Une", "kmune", pe.encode("123"), un2);
+		Usuario usu3 = new Usuario(null, "Lucas Eiji Une Tozetto", "leutozetto", pe.encode("123"), un1);
 	
 		Categoria cat1 = new Categoria(null, "Saladas");
 		Categoria cat2 = new Categoria(null, "Marmitex");
