@@ -18,6 +18,7 @@ import br.com.lph.adminp2.domain.Produto;
 import br.com.lph.adminp2.domain.ProdutoDetalhes;
 import br.com.lph.adminp2.domain.Unidade;
 import br.com.lph.adminp2.domain.Usuario;
+import br.com.lph.adminp2.domain.enums.Perfil;
 import br.com.lph.adminp2.repositories.CategoriaRepository;
 import br.com.lph.adminp2.repositories.CodigoBarrasRepository;
 import br.com.lph.adminp2.repositories.DescarteRepository;
@@ -72,6 +73,7 @@ public class DBService {
 		Unidade un2 = new Unidade(null, "Loja 32 - Eden", "15 3325-6339");
 		
 		Usuario usu1 = new Usuario(null, "Fernando Henrique Tozetto", "fhtozetto", pe.encode("123"), un1);
+		usu1.addPerfil(Perfil.ADMIN);
 		Usuario usu2 = new Usuario(null, "Karina Mayumi Une", "kmune", pe.encode("123"), un2);
 		Usuario usu3 = new Usuario(null, "Lucas Eiji Une Tozetto", "leutozetto", pe.encode("123"), un1);
 	

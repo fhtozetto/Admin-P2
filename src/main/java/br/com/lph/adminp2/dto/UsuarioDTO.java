@@ -2,6 +2,10 @@ package br.com.lph.adminp2.dto;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.NotEmpty;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import br.com.lph.adminp2.domain.Usuario;
 
 public class UsuarioDTO implements Serializable {
@@ -9,6 +13,8 @@ public class UsuarioDTO implements Serializable {
 
 	private Integer id;
 	private String nomeUsuario;
+	
+	@JsonIgnore
 	private String senha;
 	
 
