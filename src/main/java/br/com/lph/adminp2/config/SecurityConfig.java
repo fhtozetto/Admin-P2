@@ -19,6 +19,7 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import br.com.lph.adminp2.security.JWTAuthenticationFilter;
+import br.com.lph.adminp2.security.JWTAuthorizationFilter;
 import br.com.lph.adminp2.security.JWTUtil;
 
 
@@ -59,6 +60,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			.antMatchers(PUBLIC_MATCHERS).permitAll()// todos liberados pelo SpringSecurity
 			.anyRequest().authenticated(); // todo o resto o SpringSecurity bloqueia
 		http.addFilter(new JWTAuthenticationFilter(authenticationManager(), jwtUtil));
+		http.addFilter(new JWTAuthorizationFilter(authenticationManager(), jwtUtil, userDetailsService));
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS); // usada para asegurar que nosso backend não irá criar sessão de usuário.
 	}
 	
