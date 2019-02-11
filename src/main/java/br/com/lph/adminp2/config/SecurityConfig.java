@@ -27,7 +27,7 @@ import br.com.lph.adminp2.security.JWTUtil;
 
 @Configuration // Classe de configuração
 @EnableWebSecurity //
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableGlobalMethodSecurity(prePostEnabled = true) // libera para utilizar "@PreAuthorize" autorizando o uso dos endpoints pelos usuarios com niveis
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Autowired

@@ -12,8 +12,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.com.lph.adminp2.domain.Usuario;
+import br.com.lph.adminp2.domain.enums.Perfil;
 import br.com.lph.adminp2.dto.UsuarioDTO;
 import br.com.lph.adminp2.repositories.UsuarioRepository;
+import br.com.lph.adminp2.security.UserSS;
+import br.com.lph.adminp2.services.exceptions.AuthorizationException;
 import br.com.lph.adminp2.services.exceptions.DataIntegrityException;
 import br.com.lph.adminp2.services.exceptions.ObjectNotFoundException;;
 
@@ -27,6 +30,12 @@ public class UsuarioService {
 	private BCryptPasswordEncoder pe;
 	
 	public Usuario find(Integer id) {
+		
+		UserSS user = UserService.authenticated();
+		if (user == null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())) {
+			throw new AuthorizationException("Acesso Negado!");
+		}
+		
 		Optional<Usuario> obj = repo.findById(id);
 		
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
