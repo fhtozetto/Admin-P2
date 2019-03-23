@@ -2,8 +2,6 @@ package br.com.lph.adminp2.dto;
 
 import java.io.Serializable;
 
-import javax.validation.constraints.NotEmpty;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import br.com.lph.adminp2.domain.Usuario;
