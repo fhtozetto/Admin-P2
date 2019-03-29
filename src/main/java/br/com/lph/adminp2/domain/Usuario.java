@@ -40,6 +40,10 @@ public class Usuario implements Serializable{
 	@JsonIgnore // para que não mostre a senha em pesquisas (mesmo estando criptografada)
 	@NotEmpty(message="Preenchimento obrigatório!")
 	private String senha;
+	
+	@Column(unique=true) //nome do usuario deve ser unico
+	@NotEmpty(message="Preenchimento obrigatório!")
+	private String email;
 
 	@ManyToOne
 	@JoinColumn(name="unidade_id")
@@ -55,7 +59,7 @@ public class Usuario implements Serializable{
 		addPerfil(Perfil.USUARIO);
 	}
 
-	public Usuario(Integer id, String nomeCompleto, String nomeUsuario, String senha, Unidade unidade) {
+	public Usuario(Integer id, String nomeCompleto, String nomeUsuario, String senha, Unidade unidade, String email) {
 		super();
 		this.id = id;
 		this.nomeCompleto = nomeCompleto;
@@ -63,6 +67,7 @@ public class Usuario implements Serializable{
 		this.senha = senha;
 		this.unidade = unidade;
 		addPerfil(Perfil.USUARIO);
+		this.email = email;
 	}
 
 	public Integer getId() {
@@ -112,8 +117,16 @@ public class Usuario implements Serializable{
 	public void setUnidade(Unidade unidade) {
 		this.unidade = unidade;
 	}
-
 	
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

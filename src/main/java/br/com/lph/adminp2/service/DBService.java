@@ -72,10 +72,10 @@ public class DBService {
 		Unidade un1 = new Unidade(null, "Loja 28 - Cajuru", "15 3225-2443");
 		Unidade un2 = new Unidade(null, "Loja 32 - Eden", "15 3325-6339");
 		
-		Usuario usu1 = new Usuario(null, "Fernando Henrique Tozetto", "fhtozetto", pe.encode("123"), un1);
+		Usuario usu1 = new Usuario(null, "Fernando Henrique Tozetto", "fhtozetto", pe.encode("123"), un1, "fhtozetto@gmail.com");
 		usu1.addPerfil(Perfil.ADMIN);
-		Usuario usu2 = new Usuario(null, "Karina Mayumi Une", "kmune", pe.encode("123"), un2);
-		Usuario usu3 = new Usuario(null, "Lucas Eiji Une Tozetto", "leutozetto", pe.encode("123"), un1);
+		Usuario usu2 = new Usuario(null, "Karina Mayumi Une", "kmune", pe.encode("123"), un2, "fernando@superune.com.br");
+		Usuario usu3 = new Usuario(null, "Lucas Eiji Une Tozetto", "leutozetto", pe.encode("123"), un1, "fhtozetto@hotmail.com");
 	
 		Categoria cat1 = new Categoria(null, "Saladas");
 		Categoria cat2 = new Categoria(null, "Marmitex");

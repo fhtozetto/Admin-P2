@@ -2,8 +2,6 @@ package br.com.lph.adminp2.dto;
 
 import java.io.Serializable;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import br.com.lph.adminp2.domain.Usuario;
 
 public class UsuarioDTO implements Serializable {
@@ -11,16 +9,16 @@ public class UsuarioDTO implements Serializable {
 
 	private Integer id;
 	private String nomeUsuario;
-	
-	@JsonIgnore
-	private String senha;
+	private String nomeCompleto;
+	private String email;
 	
 
 	public UsuarioDTO(Usuario usu) {
 		super();
 		this.id = usu.getId();
 		this.nomeUsuario = usu.getNomeUsuario();
-		this.senha = usu.getSenha();
+		this.nomeCompleto = usu.getNomeCompleto();
+		this.email = usu.getEmail();
 	}
 
 	public Integer getId() {
@@ -39,12 +37,22 @@ public class UsuarioDTO implements Serializable {
 		this.nomeUsuario = nomeUsuario;
 	}
 
-	public String getSenha() {
-		return senha;
+	public String getNomeCompleto() {
+		return nomeCompleto;
 	}
 
-	public void setSenha(String senha) {
-		this.senha = senha;
+	public void setNomeCompleto(String nomeCompleto) {
+		this.nomeCompleto = nomeCompleto;
 	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	
 	
 }

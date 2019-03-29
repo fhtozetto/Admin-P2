@@ -36,6 +36,12 @@ public class UsuarioResource {
 		return ResponseEntity.ok().body(obj);
 	}
 	
+	@RequestMapping(value="/nomeusuario", method=RequestMethod.GET)
+	public ResponseEntity<Usuario> find(@RequestParam(value="value") String nomeUsuario) {
+		Usuario obj = service.findByNomeUsuario(nomeUsuario);
+		return ResponseEntity.ok().body(obj);
+	}
+	
 	@PreAuthorize("hasAnyRole('ADMIN')") // somente os quem tem admin em seu perfil consegue acessar
 	@RequestMapping(method=RequestMethod.POST)
 	public ResponseEntity<Void> insert(@Valid @RequestBody UsuarioDTO objDto) {
